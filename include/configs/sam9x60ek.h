@@ -34,6 +34,26 @@
  * define CONFIG_USB_EHCI_HCD to enable USB Hi-Speed (aka 2.0)
  * NB: in this case, USB 1.1 devices won't be recognized.
  */
+#ifndef CONFIG_CMD_FAT
+#define CONFIG_CMD_FAT
+#endif
+
+#if 0
+#ifndef CONFIG_CMD_USB
+#define CONFIG_CMD_USB
+#define CONFIG_USB_EHCI_HCD 
+#endif
+#endif
+
+#ifdef CONFIG_CMD_USB
+#ifdef CONFIG_USB_EHCI
+#define CONFIG_USB_EHCI_ATMEL
+#define CONFIG_SYS_USB_EHCI_MAX_ROOT_PORTS	2
+#endif
+#ifndef CONFIG_USB_STORAGE
+#define CONFIG_USB_STORAGE
+#endif
+#endif
 
 /* SDRAM */
 #define CONFIG_SYS_SDRAM_BASE		0x20000000
