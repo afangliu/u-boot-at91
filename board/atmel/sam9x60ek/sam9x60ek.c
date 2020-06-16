@@ -96,6 +96,13 @@ void board_debug_uart_init(void)
 }
 #endif
 
+void board_phy0_init(void)
+{
+	at91_set_gpio_output(AT91_PIN_PB11, 0);
+	mdelay(20);
+	at91_set_gpio_output(AT91_PIN_PB11, 1);
+}
+
 #ifdef CONFIG_BOARD_EARLY_INIT_F
 int board_early_init_f(void)
 {
@@ -129,6 +136,8 @@ int board_init(void)
 #ifdef CONFIG_CMD_NAND
 	sam9x60ek_nand_hw_init();
 #endif
+	board_phy0_init();
+
 	return 0;
 }
 
