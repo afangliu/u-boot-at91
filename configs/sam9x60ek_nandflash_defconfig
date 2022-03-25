@@ -12,7 +12,7 @@ CONFIG_FIT=y
 CONFIG_NAND_BOOT=y
 CONFIG_BOOTDELAY=3
 CONFIG_USE_BOOTARGS=y
-CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk mtdparts=atmel_nand:256k(bootstrap)ro,768k(uboot)ro,128k(env),128k(env_redundant),256k(spare),512k(dtb),4M(kernel)ro,16M(rootfs),15M(home),57M(part0),14M(part1),-(log) rootfstype=ubifs ubi.mtd=7 root=ubi0:rootfs ubi.mtd=8 ubi.mtd=9 ubi.mtd=10 ubi.mtd=11"
+CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk mtdparts=atmel_nand:256k(bootstrap)ro,768k(uboot)ro,128k(env),128k(env_redundant),256k(spare),512k(dtb),4M(kernel)ro,-(rootfs) rootfstype=ubifs ubi.mtd=7 root=ubi0:rootfs"
 CONFIG_SYS_CONSOLE_IS_IN_ENV=y
 CONFIG_MISC_INIT_R=y
 # CONFIG_DISPLAY_BOARDINFO is not set
