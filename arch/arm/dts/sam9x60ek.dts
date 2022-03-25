@@ -80,7 +80,12 @@
 					};
 
 			};
-		};
+
+            watchdog@ffffff80 {
+				timeout-sec = <15>;
+		    	status = "okay";
+		    };
+		};		
 	};
 };
 

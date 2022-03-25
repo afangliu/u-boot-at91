@@ -13,6 +13,7 @@
  * timeout need to be set from U-Boot, be sure that the bootstrap doesn't
  * write to this register. Inform Linux to it too
  */
+#define DEBUG 1
 
 #include <asm/io.h>
 #include <asm/arch/at91_wdt.h>

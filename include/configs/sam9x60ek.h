@@ -22,6 +22,10 @@
 #define CONFIG_USART_BASE   ATMEL_BASE_DBGU
 #define CONFIG_USART_ID     0 /* ignored in arm */
 
+#define CONFIG_AUTOBOOT_KEYED 1
+#define CONFIG_AUTOBOOT_PROMPT  "Press space to abort autoboot in: %2d "
+#define CONFIG_AUTOBOOT_STOP_STR " "
+
 /* general purpose I/O */
 #define CONFIG_ATMEL_LEGACY            /* required until (g)pio is fixed */
 
@@ -96,11 +100,11 @@
 
 #elif defined(CONFIG_NAND_BOOT)
 /* bootstrap + u-boot + env + linux in nandflash */
-#define CONFIG_ENV_OFFSET		0x140000
-#define CONFIG_ENV_OFFSET_REDUND	0x100000
+#define CONFIG_ENV_OFFSET		0x100000
+#define CONFIG_ENV_OFFSET_REDUND	0x120000
 #define CONFIG_ENV_SIZE		0x20000		/* 1 sector = 128 kB */
 #define CONFIG_BOOTCOMMAND	"nand read " \
-				"0x22000000 0x200000 0x600000; " \
+				"0x22000000 0x200000 0x400000; " \
 				"nand read 0x21000000 0x180000 0x20000; " \
 				"bootz 0x22000000 - 0x21000000"
 

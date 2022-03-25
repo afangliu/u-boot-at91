@@ -12,7 +12,7 @@ CONFIG_FIT=y
 CONFIG_NAND_BOOT=y
 CONFIG_BOOTDELAY=3
 CONFIG_USE_BOOTARGS=y
-CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk mtdparts=atmel_nand:256k(bootstrap)ro,768k(uboot),256k(env_redundant),256k(env),512k(dtb),6M(kernel),-(rootfs) rootfstype=ubifs ubi.mtd=6 root=ubi0:rootfs rw"
+CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk mtdparts=atmel_nand:256k(bootstrap)ro,768k(uboot)ro,128k(env),128k(env_redundant),256k(spare),512k(dtb),4M(kernel)ro,16M(rootfs),15M(home),57M(part0),14M(part1),-(log) rootfstype=ubifs ubi.mtd=7 root=ubi0:rootfs ubi.mtd=8 ubi.mtd=9 ubi.mtd=10 ubi.mtd=11"
 CONFIG_SYS_CONSOLE_IS_IN_ENV=y
 CONFIG_MISC_INIT_R=y
 # CONFIG_DISPLAY_BOARDINFO is not set
@@ -20,9 +20,9 @@ CONFIG_HUSH_PARSER=y
 CONFIG_SYS_PROMPT="U-Boot> "
 CONFIG_CMD_BOOTZ=y
 CONFIG_CMD_DM=y
-CONFIG_CMD_I2C=y
+# CONFIG_CMD_I2C is not set
 # CONFIG_CMD_FLASH is not set
-CONFIG_CMD_MMC=y
+# CONFIG_CMD_MMC is not set
 CONFIG_CMD_NAND=y
 CONFIG_CMD_NAND_TRIMFFS=y
 # CONFIG_CMD_NET is not set
@@ -38,11 +38,11 @@ CONFIG_CLK_AT91=y
 CONFIG_AT91_GENERIC_CLK=y
 CONFIG_DM_GPIO=y
 CONFIG_AT91_GPIO=y
-CONFIG_DM_I2C=y
-CONFIG_SYS_I2C_AT91=y
-CONFIG_I2C_EEPROM=y
-CONFIG_DM_MMC=y
-CONFIG_GENERIC_ATMEL_MCI=y
+# CONFIG_DM_I2C is not set
+# CONFIG_SYS_I2C_AT91 is not set
+# CONFIG_I2C_EEPROM is not set
+# CONFIG_DM_MMC is not set
+# CONFIG_GENERIC_ATMEL_MCI is not set
 CONFIG_PINCTRL=y
 CONFIG_PINCTRL_AT91=y
 CONFIG_DM_SERIAL=y
@@ -52,3 +52,10 @@ CONFIG_ATMEL_USART=y
 CONFIG_TIMER=y
 CONFIG_ATMEL_PIT_TIMER=y
 CONFIG_OF_LIBFDT_OVERLAY=y
+CONFIG_ARCH_EARLY_INIT_R=y
+CONFIG_WATCHDOG=y
+CONFIG_WDT=y
+CONFIG_WDT_AT91=y 
+# CONFIG_NET is not set
+# CONFIG_INPUT is not set
+# CONFIG_MMC is not set

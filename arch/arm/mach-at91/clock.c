@@ -11,6 +11,7 @@
 #include <asm/arch/hardware.h>
 #include <asm/arch/at91_pmc.h>
 #include <asm/arch/at91_wdt.h>
+#include <asm/arch/gpio.h>
 
 #define EN_UPLL_TIMEOUT		500
 
@@ -130,6 +131,41 @@ void at91_pllicpr_init(u32 icpr)
 }
 #endif
 
+
+void hw_watchdog_ping(void)
+{
+	static ulong next_hwdt_reset;
+	static int hw_watchdog_flag = 0;
+	ulong now;
+
+	now = get_timer(0);
+
+	/* Do not reset the watchdog too often */
+	if (now > next_hwdt_reset)
+	{
+		next_hwdt_reset = now + 500; /* reset every 500ms */
+
+		hw_watchdog_flag ^= 1;
+		if (hw_watchdog_flag) {
+			at91_set_gpio_output(AT91_PIN_PA26, 0);
+			/*printf("hw_watchdog_ping, now %d, output 0\n", (int)now);*/
+		} else {
+			at91_set_gpio_output(AT91_PIN_PA26, 1);
+			/*printf("hw_watchdog_ping, now %d, output 1\n", (int)now);*/
+		}
+	}
+
+	return;
+}
+
+void hardware_watchdog_reset(void)
+{
+	/* reset hardware watchdog */
+	hw_watchdog_ping();
+
+	return;
+}
+
 /* Called by macro WATCHDOG_RESET */
 void watchdog_reset(void)
 {
@@ -146,6 +182,8 @@ void watchdog_reset(void)
 		next_reset = now + 1000;	/* reset every 1000ms */
 		wdt_reset(watchdog_dev);
 	}
+
+	hardware_watchdog_reset();
 }
 
 int arch_early_init_r(void)
